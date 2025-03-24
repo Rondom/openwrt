@@ -121,6 +121,13 @@ define U-Boot/rk3399/Default
   ATF:=rk3399_bl31.elf
 endef
 
+define U-Boot/roc-pc-rk3399
+  $(U-Boot/rk3399/Default)
+  NAME:=ROC-RK3399-PC
+  BUILD_DEVICES:= \
+    firefly_roc-rk3399-pc
+endef
+
 define U-Boot/nanopc-t4-rk3399
   $(U-Boot/rk3399/Default)
   NAME:=NanoPC T4
@@ -314,6 +321,7 @@ define U-Boot/rock5a-rk3588s
 endef
 
 UBOOT_TARGETS := \
+  roc-pc-rk3399 \
   nanopc-t4-rk3399 \
   nanopi-r4s-rk3399 \
   rock-4c-plus-rk3399 \
