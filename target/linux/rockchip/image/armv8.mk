@@ -25,6 +25,17 @@ define Device/firefly_roc-rk3328-cc
 endef
 TARGET_DEVICES += firefly_roc-rk3328-cc
 
+define Device/firefly_roc-rk3399-pc
+  DEVICE_VENDOR := Firefly
+  DEVICE_MODEL := ROC-RK3399-PC
+  DEVICE_ALT0_VENDOR := Libre Computer
+  DEVICE_ALT0_MODEL := ROC-RK3399-PC Elite
+  SOC := rk3399
+  DEVICE_DTS := rockchip/rk3399-roc-pc
+  UBOOT_DEVICE_NAME := roc-pc-rk3399
+endef
+TARGET_DEVICES += firefly_roc-rk3399-pc
+
 define Device/friendlyarm_nanopc-t4
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPC T4
