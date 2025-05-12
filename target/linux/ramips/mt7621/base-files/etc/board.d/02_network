@@ -92,6 +92,7 @@ ramips_setup_interfaces()
 		uci add_list firewall.@zone[1].network='eth_om'
 		;;
 	cudy,m1800|\
+	genexis,pulse-ex400|\
 	yuncore,ax820|\
 	zyxel,nr7101)
 		ucidef_set_interfaces_lan_wan "lan" "wan"

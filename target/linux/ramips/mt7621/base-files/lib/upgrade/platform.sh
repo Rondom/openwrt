@@ -125,6 +125,9 @@ platform_do_upgrade() {
 	zyxel,nwa55axe)
 		nand_do_upgrade "$1"
 		;;
+	genexis,pulse-ex400)
+		inteno_do_upgrade "$1"
+		;;
 	iodata,wn-ax1167gr2|\
 	iodata,wn-ax2033gr|\
 	iodata,wn-dx1167r|\

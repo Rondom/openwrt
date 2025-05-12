@@ -45,6 +45,19 @@ define Build/arcadyan-trx
 	rm $@.hsqs $@.tail
 endef
 
+define Build/inteno-bootfs
+	mkdir -p $@.ubifs-dir/boot
+
+	# populate the boot fs with the dtb and the kernel image
+	$(CP) $(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb $@.ubifs-dir/boot/dtb
+	$(CP) $@ $@.ubifs-dir/boot/uImage
+
+	# create ubifs
+	$(STAGING_DIR_HOST)/bin/mkfs.ubifs ${MKUBIFS_OPTS} -r $@.ubifs-dir/ -o $@.new
+	rm -rf $@.ubifs-dir
+	mv $@.new $@
+endef
+
 define Build/gemtek-trailer
 	printf "%s%08X" ".GEMTEK." "$$(cksum $@ | cut -d ' ' -f1)" >> $@
 endef
@@ -1090,6 +1103,30 @@ define Device/gehua_ghl-r-001
 	kmod-usb-ledtrig-usbport -uboot-envtools
 endef
 TARGET_DEVICES += gehua_ghl-r-001
+
+# Common definitions shared between genexis_pulse-ex400 and dna_valokuitu-plus-ex400
+define Device/genexis_pulse-ex400/common
+  $(Device/dsa-migration)
+  IMAGE_SIZE := 117m
+  PAGESIZE := 2048
+  MKUBIFS_OPTS := --min-io-size=$$(PAGESIZE) --leb-size=124KiB --max-leb-cnt=96 \
+    --log-lebs=2 --space-fixup --squash-uids
+  KERNEL := kernel-bin | lzma | uImage lzma
+  KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | uImage lzma
+  IMAGE/sysupgrade.bin := append-kernel | inteno-bootfs | \
+    sysupgrade-tar kernel=$$$$@ | check-size | append-metadata
+  DEVICE_IMG_NAME = $$(DEVICE_IMG_PREFIX)-$$(2)
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615-firmware kmod-usb3 kmod-keyboard-sx951x kmod-button-hotplug
+endef
+
+define Device/genexis_pulse-ex400
+  $(Device/genexis_pulse-ex400/common)
+  DEVICE_VENDOR := Genexis
+  DEVICE_MODEL := Pulse EX400
+  DEVICE_ALT0_VENDOR := Inteno
+  DEVICE_ALT0_MODEL := Pulse EX400
+endef
+TARGET_DEVICES += genexis_pulse-ex400
 
 define Device/glinet_gl-mt1300
   $(Device/dsa-migration)
