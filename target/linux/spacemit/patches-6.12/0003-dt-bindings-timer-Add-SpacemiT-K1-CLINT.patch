@@ -1,0 +1,30 @@
+From e5164af2a2fe67cca0186932b2aff93f4c3ed99d Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:07 +0000
+Subject: [PATCH 03/11] dt-bindings: timer: Add SpacemiT K1 CLINT
+
+Add compatible string for SpacemiT K1 CLINT.
+
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ Documentation/devicetree/bindings/timer/sifive,clint.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/timer/sifive,clint.yaml b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
+index b42d43d2de48..76d83aea4e2b 100644
+--- a/Documentation/devicetree/bindings/timer/sifive,clint.yaml
++++ b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
+@@ -31,6 +31,7 @@ properties:
+           - enum:
+               - canaan,k210-clint       # Canaan Kendryte K210
+               - sifive,fu540-c000-clint # SiFive FU540
++              - spacemit,k1-clint       # SpacemiT K1
+               - starfive,jh7100-clint   # StarFive JH7100
+               - starfive,jh7110-clint   # StarFive JH7110
+               - starfive,jh8100-clint   # StarFive JH8100
+-- 
+2.49.0
+

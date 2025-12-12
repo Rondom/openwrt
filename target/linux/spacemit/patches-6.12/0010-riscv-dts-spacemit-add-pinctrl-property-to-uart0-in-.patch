@@ -1,0 +1,84 @@
+From 3579b3506fac20abe5ed690d8a9863fc562678a4 Mon Sep 17 00:00:00 2001
+From: Yixun Lan <dlan@gentoo.org>
+Date: Wed, 16 Oct 2024 08:59:43 +0800
+Subject: [PATCH 10/11] riscv: dts: spacemit: add pinctrl property to uart0 in
+ BPI-F3
+
+Before pinctrl driver implemented, the uart0 controller reply on
+bootloader for setting correct pin mux and configurations.
+
+Now, let's add pinctrl property to uart0 of Bananapi-F3 board.
+
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ .../boot/dts/spacemit/k1-bananapi-f3.dts      |  3 +++
+ arch/riscv/boot/dts/spacemit/k1-pinctrl.dtsi  | 20 +++++++++++++++++++
+ arch/riscv/boot/dts/spacemit/k1.dtsi          |  5 +++++
+ 3 files changed, 28 insertions(+)
+ create mode 100644 arch/riscv/boot/dts/spacemit/k1-pinctrl.dtsi
+
+diff --git a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+index 023274189b49..bc88d4de25a6 100644
+--- a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
++++ b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include "k1.dtsi"
++#include "k1-pinctrl.dtsi"
+ 
+ / {
+ 	model = "Banana Pi BPI-F3";
+@@ -15,5 +16,7 @@ chosen {
+ };
+ 
+ &uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_2_cfg>;
+ 	status = "okay";
+ };
+diff --git a/arch/riscv/boot/dts/spacemit/k1-pinctrl.dtsi b/arch/riscv/boot/dts/spacemit/k1-pinctrl.dtsi
+new file mode 100644
+index 000000000000..a8eac5517f85
+--- /dev/null
++++ b/arch/riscv/boot/dts/spacemit/k1-pinctrl.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (c) 2024 Yixun Lan <dlan@gentoo.org>
++ */
++
++#include <dt-bindings/gpio/gpio.h>
++
++#define K1_PADCONF(pin, func) (((pin) << 16) | (func))
++
++&pinctrl {
++	uart0_2_cfg: uart0-2-cfg {
++		uart0-2-pins {
++			pinmux = <K1_PADCONF(68, 2)>,
++				 <K1_PADCONF(69, 2)>;
++
++			bias-pull-up = <0>;
++			drive-strength = <32>;
++		};
++	};
++};
+diff --git a/arch/riscv/boot/dts/spacemit/k1.dtsi b/arch/riscv/boot/dts/spacemit/k1.dtsi
+index 0777bf9e0118..a2d5f7d4a942 100644
+--- a/arch/riscv/boot/dts/spacemit/k1.dtsi
++++ b/arch/riscv/boot/dts/spacemit/k1.dtsi
+@@ -416,6 +416,11 @@ uart9: serial@d4017800 {
+ 			status = "disabled";
+ 		};
+ 
++		pinctrl: pinctrl@d401e000 {
++			compatible = "spacemit,k1-pinctrl";
++			reg = <0x0 0xd401e000 0x0 0x400>;
++		};
++
+ 		plic: interrupt-controller@e0000000 {
+ 			compatible = "spacemit,k1-plic", "sifive,plic-1.0.0";
+ 			reg = <0x0 0xe0000000 0x0 0x4000000>;
+-- 
+2.49.0
+

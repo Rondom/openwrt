@@ -1,0 +1,32 @@
+From 21bef40ad121b5b5bfab39803f175e3b3ba465fd Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:13 +0000
+Subject: [PATCH 09/11] riscv: defconfig: enable SpacemiT SoC
+
+Enable SpacemiT SoC config in defconfig to allow the default upstream
+kernel booting on Banana Pi BPI-F3 board.
+
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+Tested-by: Jesse Taube <jesse@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ arch/riscv/configs/defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/riscv/configs/defconfig b/arch/riscv/configs/defconfig
+index b4a37345703e..ee69de93c458 100644
+--- a/arch/riscv/configs/defconfig
++++ b/arch/riscv/configs/defconfig
+@@ -30,6 +30,7 @@ CONFIG_ARCH_MICROCHIP=y
+ CONFIG_ARCH_RENESAS=y
+ CONFIG_ARCH_SIFIVE=y
+ CONFIG_ARCH_SOPHGO=y
++CONFIG_ARCH_SPACEMIT=y
+ CONFIG_SOC_STARFIVE=y
+ CONFIG_ARCH_SUNXI=y
+ CONFIG_ARCH_THEAD=y
+-- 
+2.49.0
+

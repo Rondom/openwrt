@@ -1,0 +1,34 @@
+From dfe6d083edff9f577f2e3db02fe5a838118fc0ac Mon Sep 17 00:00:00 2001
+From: Yixun Lan <dlan@gentoo.org>
+Date: Tue, 30 Jul 2024 00:28:09 +0000
+Subject: [PATCH 05/11] dt-bindings: serial: 8250: Add SpacemiT K1 uart
+ compatible
+
+Found SpacemiT's K1 uart controller is compatible with
+Intel's Xscale uart, but it's still worth to introduce a new compatible.
+
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ Documentation/devicetree/bindings/serial/8250.yaml | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/devicetree/bindings/serial/8250.yaml b/Documentation/devicetree/bindings/serial/8250.yaml
+index 692aa05500fd..0bde2379e864 100644
+--- a/Documentation/devicetree/bindings/serial/8250.yaml
++++ b/Documentation/devicetree/bindings/serial/8250.yaml
+@@ -111,7 +111,9 @@ properties:
+               - mediatek,mt7623-btif
+           - const: mediatek,mtk-btif
+       - items:
+-          - const: mrvl,mmp-uart
++          - enum:
++              - mrvl,mmp-uart
++              - spacemit,k1-uart
+           - const: intel,xscale-uart
+       - items:
+           - enum:
+-- 
+2.49.0
+

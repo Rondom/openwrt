@@ -1,0 +1,57 @@
+From 3d72d603afa72082501e9076eed61e0531339ef8 Mon Sep 17 00:00:00 2001
+From: Yixun Lan <dlan@gentoo.org>
+Date: Fri, 17 Jan 2025 07:58:46 +0800
+Subject: [PATCH 11/11] riscv: dts: spacemit: move aliases to board dts
+
+aliases info should belong to board dts, instead of
+putting it at SoC dtsi file.
+
+Fixes: d8fe64691955 ("riscv: dts: add initial SpacemiT K1 SoC device tree")
+Link: https://lore.kernel.org/all/6a8bb914-858e-479d-a7d9-09e0ff688160@app.fastmail.com
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts |  4 ++++
+ arch/riscv/boot/dts/spacemit/k1.dtsi            | 12 ------------
+ 2 files changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+index bc88d4de25a6..1d617b40a2d5 100644
+--- a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
++++ b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+@@ -10,6 +10,10 @@ / {
+ 	model = "Banana Pi BPI-F3";
+ 	compatible = "bananapi,bpi-f3", "spacemit,k1";
+ 
++	aliases {
++		serial0 = &uart0;
++	};
++
+ 	chosen {
+ 		stdout-path = "serial0";
+ 	};
+diff --git a/arch/riscv/boot/dts/spacemit/k1.dtsi b/arch/riscv/boot/dts/spacemit/k1.dtsi
+index a2d5f7d4a942..c670ebf8fa12 100644
+--- a/arch/riscv/boot/dts/spacemit/k1.dtsi
++++ b/arch/riscv/boot/dts/spacemit/k1.dtsi
+@@ -10,18 +10,6 @@ / {
+ 	model = "SpacemiT K1";
+ 	compatible = "spacemit,k1";
+ 
+-	aliases {
+-		serial0 = &uart0;
+-		serial1 = &uart2;
+-		serial2 = &uart3;
+-		serial3 = &uart4;
+-		serial4 = &uart5;
+-		serial5 = &uart6;
+-		serial6 = &uart7;
+-		serial7 = &uart8;
+-		serial8 = &uart9;
+-	};
+-
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+-- 
+2.49.0
+

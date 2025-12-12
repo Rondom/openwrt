@@ -1,0 +1,32 @@
+From 16c9147e6a6c6342f4b1f9909b8f914f6e4adcab Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:05 +0000
+Subject: [PATCH 01/11] dt-bindings: riscv: Add SpacemiT X60 compatibles
+
+The X60 is RISC-V CPU cores from SpacemiT and currently used in their K1
+SoC.
+
+Link: https://www.spacemit.com/en/spacemit-x60-core/
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ Documentation/devicetree/bindings/riscv/cpus.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Documentation/devicetree/bindings/riscv/cpus.yaml
+index 8edc8261241a..acb5b9ba6f04 100644
+--- a/Documentation/devicetree/bindings/riscv/cpus.yaml
++++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+@@ -46,6 +46,7 @@ properties:
+               - sifive,u7
+               - sifive,u74
+               - sifive,u74-mc
++              - spacemit,x60
+               - thead,c906
+               - thead,c908
+               - thead,c910
+-- 
+2.49.0
+

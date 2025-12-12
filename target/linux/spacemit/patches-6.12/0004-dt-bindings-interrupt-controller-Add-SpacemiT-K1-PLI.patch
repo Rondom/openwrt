@@ -1,0 +1,30 @@
+From 562272a287d5633dfdffaae43dcd25244635cc74 Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:08 +0000
+Subject: [PATCH 04/11] dt-bindings: interrupt-controller: Add SpacemiT K1 PLIC
+
+Add compatible string for SpacemiT K1 PLIC.
+
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ .../bindings/interrupt-controller/sifive,plic-1.0.0.yaml         | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml b/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+index 7e1451f9786a..3dfe425909d1 100644
+--- a/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
++++ b/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+@@ -59,6 +59,7 @@ properties:
+           - enum:
+               - canaan,k210-plic
+               - sifive,fu540-c000-plic
++              - spacemit,k1-plic
+               - starfive,jh7100-plic
+               - starfive,jh7110-plic
+           - const: sifive,plic-1.0.0
+-- 
+2.49.0
+

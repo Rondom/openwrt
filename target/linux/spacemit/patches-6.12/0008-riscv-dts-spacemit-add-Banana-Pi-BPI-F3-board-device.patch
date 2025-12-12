@@ -1,0 +1,74 @@
+From d60d57ab6b2a803b17b6f2aa78abd9487a9ece36 Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:12 +0000
+Subject: [PATCH 08/11] riscv: dts: spacemit: add Banana Pi BPI-F3 board device
+ tree
+
+Banana Pi BPI-F3 [1] is a industrial grade RISC-V development board, it
+design with SpacemiT K1 8 core RISC-V chip [2].
+
+Currently only support booting into console with only uart enabled,
+other features will be added soon later.
+
+Link: https://docs.banana-pi.org/en/BPI-F3/BananaPi_BPI-F3 [1]
+Link: https://www.spacemit.com/en/spacemit-key-stone-2/ [2]
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Jesse Taube <jesse@rivosinc.com>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ arch/riscv/boot/dts/Makefile                  |  1 +
+ arch/riscv/boot/dts/spacemit/Makefile         |  2 ++
+ .../boot/dts/spacemit/k1-bananapi-f3.dts      | 19 +++++++++++++++++++
+ 3 files changed, 22 insertions(+)
+ create mode 100644 arch/riscv/boot/dts/spacemit/Makefile
+ create mode 100644 arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+
+diff --git a/arch/riscv/boot/dts/Makefile b/arch/riscv/boot/dts/Makefile
+index fdae05bbf556..bff887d38abe 100644
+--- a/arch/riscv/boot/dts/Makefile
++++ b/arch/riscv/boot/dts/Makefile
+@@ -5,6 +5,7 @@ subdir-y += microchip
+ subdir-y += renesas
+ subdir-y += sifive
+ subdir-y += sophgo
++subdir-y += spacemit
+ subdir-y += starfive
+ subdir-y += thead
+ 
+diff --git a/arch/riscv/boot/dts/spacemit/Makefile b/arch/riscv/boot/dts/spacemit/Makefile
+new file mode 100644
+index 000000000000..ac617319a574
+--- /dev/null
++++ b/arch/riscv/boot/dts/spacemit/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0
++dtb-$(CONFIG_ARCH_SPACEMIT) += k1-bananapi-f3.dtb
+diff --git a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+new file mode 100644
+index 000000000000..023274189b49
+--- /dev/null
++++ b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
++ */
++
++#include "k1.dtsi"
++
++/ {
++	model = "Banana Pi BPI-F3";
++	compatible = "bananapi,bpi-f3", "spacemit,k1";
++
++	chosen {
++		stdout-path = "serial0";
++	};
++};
++
++&uart0 {
++	status = "okay";
++};
+-- 
+2.49.0
+

@@ -1,0 +1,36 @@
+From 8814aa123adb373f66025cda80da94b59e849313 Mon Sep 17 00:00:00 2001
+From: Yangyu Chen <cyy@cyyself.name>
+Date: Tue, 30 Jul 2024 00:28:10 +0000
+Subject: [PATCH 06/11] riscv: add SpacemiT SoC family Kconfig support
+
+The first SoC in the SpacemiT series is K1, which contains 8 RISC-V
+cores with RISC-V Vector v1.0 support.
+
+Link: https://www.spacemit.com/en/spacemit-key-stone-2/
+Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+ arch/riscv/Kconfig.socs | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/riscv/Kconfig.socs b/arch/riscv/Kconfig.socs
+index f51bb24bc84c..1916cf7ba450 100644
+--- a/arch/riscv/Kconfig.socs
++++ b/arch/riscv/Kconfig.socs
+@@ -24,6 +24,11 @@ config ARCH_SOPHGO
+ 	help
+ 	  This enables support for Sophgo SoC platform hardware.
+ 
++config ARCH_SPACEMIT
++	bool "SpacemiT SoCs"
++	help
++	  This enables support for SpacemiT SoC platform hardware.
++
+ config ARCH_STARFIVE
+ 	def_bool SOC_STARFIVE
+ 
+-- 
+2.49.0
+
